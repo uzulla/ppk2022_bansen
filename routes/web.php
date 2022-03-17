@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\JsonResponse as JsonResponseAlias;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,10 @@ Route::get('/', function () {
 Route::get('/b', function () {
     return view('b');
 });
+
+Route::get('/some', function (Request $request) {
+    $name = $request->input('name');
+    return new JsonResponseAlias(['test'=>'data', 'name'=>$name]);
+});
+
+
