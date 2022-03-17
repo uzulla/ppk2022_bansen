@@ -7,6 +7,6 @@
         <title>MyApp</title>
     </head>
     <body>
-        <h1>Hello world</h1>
+        <h1>Bee</h1>
     </body>
 </html>
