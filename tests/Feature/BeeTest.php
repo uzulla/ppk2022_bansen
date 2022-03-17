@@ -19,6 +19,8 @@ class BeeTest extends TestCase
 
         $response->assertStatus(200);
 
-        $this->assertStringContainsString("Bee", $response->content());
+        $this->assertStringContainsString("Bee", $response->getContent());
+
+        $this->assertStringStartsWith('text/html', $response->headers->get('content-type'));
     }
 }
