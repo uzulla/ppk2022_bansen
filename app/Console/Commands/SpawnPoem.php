@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class SpawnPoem extends Command
 {
@@ -27,7 +28,8 @@ class SpawnPoem extends Command
      */
     public function handle()
     {
-        echo "hello hello";
+        DB::insert('insert into item (poem) values (?)', ["PHPer's poem"]);
+
         return 0;
     }
 }
