@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\BanBanSenSen;
 use App\Models\Bansen;
 use Illuminate\Console\Command;
 
@@ -29,10 +28,9 @@ class GetLatestBansenNo extends Command
      */
     public function handle()
     {
-        $bansen = Bansen::query()->orderBy('id', 'desc')->limit(1)->get();
-
-        echo $bansen->first()->id;
-
+        /** @var Bansen $bansen */
+        $bansen =  Bansen::query()->orderBy('id', 'desc')->first();
+        echo $bansen->id . PHP_EOL;
 
         return 0;
     }
