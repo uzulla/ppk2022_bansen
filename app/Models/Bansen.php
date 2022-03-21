@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 class Bansen extends Model
 {
@@ -13,10 +14,19 @@ class Bansen extends Model
     {
         $bansen = static::query()->orderBy('id', 'desc')->first();
 
-        if(!($bansen instanceof Bansen)){
+        if (!($bansen instanceof Bansen)) {
             return null;
         }
 
+        return $bansen;
+    }
+
+    public static function insertOne(): Bansen
+    {
+        $bansen = new Bansen();
+        if (false === $bansen->save()) {
+            throw new ServiceUnavailableHttpException("Bansen::insertOne failed.");
+        }
         return $bansen;
     }
 }
