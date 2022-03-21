@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Bansen extends Model
 {
     use HasFactory;
+
+    public static function getLatestOne(): ?Bansen
+    {
+        $bansen = static::query()->orderBy('id', 'desc')->first();
+
+        if(!($bansen instanceof Bansen)){
+            return null;
+        }
+
+        return $bansen;
+    }
 }
