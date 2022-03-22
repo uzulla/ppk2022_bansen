@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
+use RuntimeException;
 
 class Bansen extends Model
 {
@@ -25,7 +25,7 @@ class Bansen extends Model
     {
         $bansen = new Bansen();
         if (false === $bansen->save()) {
-            throw new ServiceUnavailableHttpException("Bansen::insertOne failed.");
+            throw new RuntimeException("Bansen::insertOne failed.");
         }
         return $bansen;
     }
