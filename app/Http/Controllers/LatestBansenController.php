@@ -6,9 +6,7 @@ use App\Models\Bansen;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Log\Logger;
-use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 class LatestBansenController extends Controller
 {
@@ -21,12 +19,7 @@ class LatestBansenController extends Controller
      */
     public function __invoke(Request $request, Logger $logger): Response
     {
-        try {
-            $bansen = Bansen::getLatestOne();
-        } catch (RuntimeException $e) {
-            $logger->error("fatal: fail latest bansen {$e->getMessage()}", ['error'=>$e]);
-            throw new ServiceUnavailableHttpException("fatal: fail latest bansen {$e->getMessage()}");
-        }
+        $bansen = Bansen::getLatestOne();
 
         if (is_null($bansen)) {
             $logger->notice("not found bansen");
