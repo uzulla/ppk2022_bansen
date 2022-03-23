@@ -11,7 +11,7 @@
 
 <h2>{{ $latest_bansen_no }}</h2>
 
-<form action="/post_bansen_increment" method="post">
+<form action="{{ route("bansen_increment") }}" method="post">
     @csrf
     <button type="submit">Increment!!</button>
 </form>

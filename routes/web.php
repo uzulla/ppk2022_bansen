@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', LatestBansenController::class)->name('top');
 
-Route::post('/post_bansen_increment', PostIncrementBansenController::class);
+Route::post('/post_bansen_increment', PostIncrementBansenController::class)->name('bansen_increment');
 
 Route::get('/b', function () {
     return view('b');
