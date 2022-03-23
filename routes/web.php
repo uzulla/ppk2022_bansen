@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IncrementBansenController;
 use App\Http\Controllers\LatestBansenController;
+use App\Http\Controllers\PostIncrementBansenController;
 use Illuminate\Http\JsonResponse as JsonResponseAlias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', LatestBansenController::class);
+Route::get('/', LatestBansenController::class)->name('top');
+
+Route::post('/post_bansen_increment', PostIncrementBansenController::class);
 
 Route::get('/b', function () {
     return view('b');
