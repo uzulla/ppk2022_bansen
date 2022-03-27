@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\BansenIncremented;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
@@ -27,6 +28,9 @@ class Bansen extends Model
         if (false === $bansen->save()) {
             throw new RuntimeException("Bansen::insertOne failed.");
         }
+
+        BansenIncremented::dispatch($bansen->id);
+
         return $bansen;
     }
 }
