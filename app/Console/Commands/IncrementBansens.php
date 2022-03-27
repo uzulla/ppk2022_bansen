@@ -28,9 +28,7 @@ class IncrementBansens extends Command
      */
     public function handle()
     {
-        $bansen = new Bansen();
-
-        $bansen->save();
+        Bansen::insertOne();
 
         return 0;
     }
