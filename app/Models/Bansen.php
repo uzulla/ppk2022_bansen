@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\BansenIncremented;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use RuntimeException;
 
 class Bansen extends Model
@@ -28,6 +29,8 @@ class Bansen extends Model
         if (false === $bansen->save()) {
             throw new RuntimeException("Bansen::insertOne failed.");
         }
+
+        Cache::put('last_update_at', time(), 10);
 
         BansenIncremented::dispatch($bansen->id);
 

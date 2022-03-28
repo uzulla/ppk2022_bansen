@@ -6,6 +6,7 @@ use App\Models\Bansen;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LatestBansenController extends Controller
@@ -26,8 +27,11 @@ class LatestBansenController extends Controller
             throw new NotFoundHttpException('NotFound latest bansen');
         }
 
+        $last_update_at = Cache::get('last_update_at', 0);
+
         $view = view('latest_bansen', [
-            'latest_bansen_no' => $bansen->id
+            'latest_bansen_no' => $bansen->id,
+            'last_update_at' => $last_update_at
         ]);
 
         return new Response($view->render());

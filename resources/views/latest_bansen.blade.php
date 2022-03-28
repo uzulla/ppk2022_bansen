@@ -11,6 +11,8 @@
 
 <h2>{{ $latest_bansen_no }}</h2>
 
+<h3>last update at : {{ $last_update_at }}</h3>
+
 <form action="{{ route("bansen_increment") }}" method="post">
     @csrf
     <button type="submit">Increment!!</button>
