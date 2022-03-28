@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\BansenIncremented;
+use App\Listeners\CheckBansenLatestNo;
 use App\Listeners\EmergLogBansenIncrement;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +23,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         BansenIncremented::class => [
             EmergLogBansenIncrement::class,
+            CheckBansenLatestNo::class,
         ],
     ];
 
