@@ -6,9 +6,17 @@ use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Log\Logger;
 
-class AddPoweredByMiddleware
+class AddPoweredByAndSteamRequestMiddleware
 {
+    protected Logger $logger;
+
+    public function __construct(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -18,9 +26,10 @@ class AddPoweredByMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $this->logger->notice("dump request" . print_r($request->all(), true));
+
         /** @var Response|RedirectResponse $response */
         $response = $next($request);
-
 
         $response->headers->add([
             'X-Powered-By' => 'laravel 9'
