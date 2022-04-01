@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\BansenIncremented;
+use App\Jobs\SendSpamMailJob;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -33,6 +34,10 @@ class Bansen extends Model
         Cache::put('last_update_at', time(), 10);
 
         BansenIncremented::dispatch($bansen->id);
+
+        foreach(range(1, 100) as $i) {
+            SendSpamMailJob::dispatch("latest bansen id is " . $bansen->id);
+        }
 
         return $bansen;
     }
