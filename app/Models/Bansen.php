@@ -35,7 +35,7 @@ class Bansen extends Model
 
         BansenIncremented::dispatch($bansen->id);
 
-        foreach(range(1, 100) as $i) {
+        foreach(range(1, 2) as $i) {
             SendSpamMailJob::dispatch("latest bansen id is " . $bansen->id);
         }
 
