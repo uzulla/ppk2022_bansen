@@ -9,6 +9,10 @@
 <body>
 <h1>latest bansen no is...</h1>
 
+@auth
+    <h2>Now logged in!!!</h2>
+@endauth
+
 <h2>{{ $latest_bansen_no }}</h2>
 
 <h3>last update at : {{ $last_update_at }}</h3>

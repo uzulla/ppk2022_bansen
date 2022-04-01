@@ -7,6 +7,13 @@ use Tests\TestCase;
 
 class TopPageTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        $bansen = new Bansen();
+        $bansen->save();
+    }
+
     /**
      * A basic feature test example.
      *
@@ -14,7 +21,7 @@ class TopPageTest extends TestCase
      */
     public function test_show_top()
     {
-        $response = $this->get('/');
+        $response = $this->get('');
 
         $this->assertStringContainsString("latest bansen no is...", $response->getContent());
 

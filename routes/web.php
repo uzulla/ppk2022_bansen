@@ -3,7 +3,7 @@
 use App\Http\Controllers\IncrementBansenController;
 use App\Http\Controllers\LatestBansenController;
 use App\Http\Controllers\PostIncrementBansenController;
-use Illuminate\Http\JsonResponse as JsonResponseAlias;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +28,7 @@ Route::get('/b', function () {
 
 Route::get('/some', function (Request $request) {
     $name = $request->input('name');
-    return new JsonResponseAlias(['test'=>'data', 'name'=>$name]);
+    return new JsonResponse(['test'=>'data', 'name'=>$name]);
 });
 
 Route::get('/latest_bansen', LatestBansenController::class)->name('latest_bansen');
@@ -36,3 +36,8 @@ Route::get('/latest_bansen', LatestBansenController::class)->name('latest_bansen
 Route::get('/increment_bansen', IncrementBansenController::class);
 
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

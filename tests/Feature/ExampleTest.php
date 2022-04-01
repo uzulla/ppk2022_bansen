@@ -2,11 +2,19 @@
 
 namespace Tests\Feature;
 
+use App\Models\Bansen;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        $bansen = new Bansen();
+        $bansen->save();
+    }
+
     /**
      * A basic test example.
      *
