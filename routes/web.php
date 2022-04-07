@@ -28,16 +28,21 @@ Route::get('/b', function () {
 
 Route::get('/some', function (Request $request) {
     $name = $request->input('name');
-    return new JsonResponse(['test'=>'data', 'name'=>$name]);
+    return new JsonResponse(['test' => 'data', 'name' => $name]);
 });
 
 Route::get('/latest_bansen', LatestBansenController::class)->name('latest_bansen');
 
 Route::get('/increment_bansen', IncrementBansenController::class);
 
+Route::get('/token/issue', function (Request $request) {
+    $token = $request->user()->createToken("test_token");
+    return ['token' => $token->plainTextToken];
+})->middleware(['auth']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
