@@ -3,6 +3,7 @@
 use App\Http\Controllers\IncrementBansenController;
 use App\Http\Controllers\LatestBansenController;
 use App\Http\Controllers\PostIncrementBansenController;
+use App\Http\Middleware\AddSomeTextMiddleware;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,26 @@ Route::get('/token/issue', function (Request $request) {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/hello/{name}', function (Request $request, string $name) {
+    var_dump($name);
+    var_dump(get_class($request));
+    return $name;
+})->where(['name' => '[0-9]+']);
+
+Route::name('prefix.')
+    ->prefix('prefix')
+    ->middleware(AddSomeTextMiddleware::class)
+    ->group(function () {
+        Route::get('/hello', function () {
+            var_dump(route('prefix.hello_route'));
+            return "prefixed hello";
+        })->name('hello_route');
+
+        Route::get('/greet', function () {
+            return "prefixed greet";
+        })->name('greet');
+    });
+
 
 require __DIR__ . '/auth.php';
