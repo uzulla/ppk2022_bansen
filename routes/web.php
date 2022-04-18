@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IncrementBansenController;
 use App\Http\Controllers\LatestBansenController;
+use App\Http\Controllers\PingMeController;
 use App\Http\Controllers\PostIncrementBansenController;
 use App\Http\Middleware\AddSomeTextMiddleware;
 use Illuminate\Http\JsonResponse;
@@ -66,5 +67,10 @@ Route::name('prefix.')
         })->name('greet');
     });
 
+Route::name('notification_test.')
+    ->prefix('notify')
+    ->group(function () {
+        Route::get('/me', PingMeController::class);
+    });
 
 require __DIR__ . '/auth.php';
